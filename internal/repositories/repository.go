@@ -33,13 +33,17 @@ func (r *TaskRepository) Create(task models.Task) error {
 
 // Edit: edits task by index via changing text
 func (r *TaskRepository) Edit(index int, newText string) error {
+	if index < 0 || index >= len(r.tasks) {
+		return errors.New("Invalid index!")
+	}
+
 	r.tasks[index].Text = newText
 	return nil
 }
 
 // Delete: deletes task by index
 func (r *TaskRepository) Delete(index int) error {
-	if index < 0 || index > len(r.tasks) {
+	if index < 0 || index >= len(r.tasks) {
 		return errors.New("Invalid index!")
 	}
 
@@ -49,10 +53,10 @@ func (r *TaskRepository) Delete(index int) error {
 
 // Toggle: changes the status 'done' to 'undone' and vice versa
 func (r *TaskRepository) Toggle(index int) error {
-	if r.tasks[index].Done == true {
-		r.tasks[index].Done = false
-	} else {
-		r.tasks[index].Done = true
+	if index < 0 || index >= len(r.tasks) {
+		return errors.New("Invalid index!")
 	}
+
+	r.tasks[index].Done = !r.tasks[index].Done
 	return nil
 }

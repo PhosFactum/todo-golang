@@ -40,18 +40,15 @@ func (s *TaskService) AddTaskService(text string) error {
 
 // EditTask: edits existing task
 func (s *TaskService) EditTaskService(index int, newText string) error {
-	s.repo.Edit(index, newText)
-	return nil
+	return s.repo.Edit(index, newText)
 }
 
 // DeleteTask: deletes existing task
 func (s *TaskService) DeleteTaskService(index int) error {
-	s.repo.Delete(index)
-	return nil
+	return s.repo.Delete(index)
 }
 
 // ToggleTask: toggle status of completion on task
 func (s *TaskService) ToggleTaskService(index int) error {
-	s.repo.Toggle(index)
-	return nil
+	return s.repo.Toggle(index)
 }
